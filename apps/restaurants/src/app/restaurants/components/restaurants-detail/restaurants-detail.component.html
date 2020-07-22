@@ -1,0 +1,57 @@
+<mat-card class="mat-card-light"> 
+    <mat-card-header style="display: flex; justify-content: space-between;">
+      <mat-card-title class="accent">
+        <span *ngIf="restaurantForm.value.id !== null; else elseBlock">
+          Editing Restaurant
+        </span>
+        <ng-template #elseBlock>
+          Create Restaurant
+        </ng-template>
+      </mat-card-title>
+      
+    </mat-card-header>
+  <form [formGroup]="restaurantForm" (ngSubmit)="saved.emit(restaurantForm.value)">
+    <mat-card-content>
+
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" type="string">
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <mat-label>Food Type</mat-label>
+        <input matInput formControlName="foodType" type="string">
+      </mat-form-field>
+      <br>
+
+      <mat-form-field appearance="fill" >
+        <mat-label>Service Type</mat-label>
+        <mat-select formControlName="serviceType">
+          <mat-option *ngFor="let option of serviceTypes" [value]="option.value">
+            {{option.display}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <section>
+        <mat-label>Quality Rating</mat-label>
+        <br>
+        <ngb-rating matInput formControlName="quality" ></ngb-rating>
+      </section>
+
+      <section>
+        <mat-label>Price Rating</mat-label>
+        <br>
+        <ngb-rating matInput formControlName="price"></ngb-rating>
+      </section>
+
+    </mat-card-content>
+    <mat-card-actions style="display: flex; justify-content: space-between;">
+      <button [disabled]="restaurantForm.invalid" type="submit" mat-button color="primary">Save</button>
+      <button type="button" mat-button (click)="cancelled.emit();$event.stopImmediatePropagation();cancel();">
+        Cancel
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

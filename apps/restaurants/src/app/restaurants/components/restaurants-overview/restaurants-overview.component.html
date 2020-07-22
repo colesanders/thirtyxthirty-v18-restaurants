@@ -1,0 +1,22 @@
+<mat-card class="mat-card-light"> 
+    <div *ngIf="(restaurant$|async) !== undefined && (restaurant$|async) !== null">
+      <mat-card-header style="display: flex; justify-content: space-between;">
+        <mat-card-title class="accent">
+          Restaurant: 
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{ (restaurant$ | async).name }} - {{ (restaurant$ | async).amount }}
+        </mat-card-subtitle>
+      </mat-card-header>
+  
+      <mat-card-content>
+          {{restaurant$ | async | json}}
+      </mat-card-content>
+  
+      <mat-card-actions style="display: flex; justify-content: space-between;">
+        <button type="button" mat-button (click)="close()">
+          Close
+        </button>
+      </mat-card-actions>
+    </div>
+  </mat-card>

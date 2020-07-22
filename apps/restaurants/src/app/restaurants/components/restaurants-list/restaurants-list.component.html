@@ -1,0 +1,22 @@
+<mat-card class="mat-card-light">
+    <mat-card-header>
+      <mat-card-title class="accent">
+        Restaurants List
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let restaurant of restaurants" (click)="selected.emit(restaurant)" style="cursor: pointer">
+          <h3 matLine> {{ restaurant.name }} </h3>
+          <p matLine>{{ (restaurant.foodType | titlecase) + ' ' + (restaurant.serviceType | titlecase) }}</p>
+
+          <mat-icon [svgIcon]="restaurant.icon" ></mat-icon>
+  
+          <button mat-icon-button color="warn" (click)="deleted.emit(restaurant); $event.stopImmediatePropagation()" >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+      
+    </mat-card-content>
+  </mat-card>

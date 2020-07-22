@@ -1,0 +1,30 @@
+<div class="secondary-div">
+    <mat-toolbar class="secondary-toolbar">
+        <span>Restaurant List</span>
+        <div *ngIf="(restaurant$|async) !== undefined && (restaurant$|async) !== null" style="margin-left: 10px">
+            <a mat-button class="nav-link" 
+            [routerLink]="(restaurant$ | async).id" routerLinkActive="active">
+                <span >
+                  Restaurant Overview
+                </span>
+            </a>
+        </div>
+    </mat-toolbar>
+</div>
+
+<div class="restaurants-containers">
+    <div class="restaurants-list">
+        <thirty-restaurants-list [restaurants]="restaurants$ | async" (selected)="select($event)" (deleted)="delete($event)">
+        </thirty-restaurants-list>
+    </div>
+    <div [@openClose]="detailOpen ? 'open' : 'closed'" >
+        <thirty-restaurants-detail [restaurant]="restaurant$ | async" (saved)="save($event)" (cancelled)="cancel()" 
+        (click)="focusDetail();$event.stopImmediatePropagation()" > 
+        </thirty-restaurants-detail>
+    </div>
+</div>
+
+<div class="restaurants-containers">
+    <router-outlet>
+    </router-outlet>
+</div>
